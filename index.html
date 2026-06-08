@@ -1,157 +1,421 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>landing</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-  <script>
-  // Initial check on load
-  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (systemPrefersDark) {
-    document.documentElement.classList.add('dark');
-  }
-
-  // Wait for DOM to load, then attach instant click handler
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('theme-switcher');
-    
-    btn.addEventListener('click', () => {
-      // Flips the class instantly; browser swaps the CSS variables on the fly
-      document.documentElement.classList.toggle('dark');
-    });
-  });
-  </script>
-
-  <style type="text/tailwindcss">
-    /* Theme configuration mapping custom utility keys to native CSS variables */
-    @theme {
-      --color-neutral-primary: var(--neutral-primary);
-      --color-neutral-secondary-soft: var(--neutral-secondary-soft);
-      --color-neutral-tertiary: var(--neutral-tertiary);
-      --color-default: var(--border-default);
-      --color-heading: var(--text-heading);
-      --color-body: var(--text-body);
-      --color-brand: var(--brand-bg);
-      --color-fg-brand: var(--brand-fg);
-      --radius-base: var(--radius);
-    }
-
-    /* Default Light Mode Token definitions */
-    :root {
-      --neutral-primary: #ffffff;
-      --neutral-secondary-soft: #f8fafc; /* slate-50 */
-      --neutral-tertiary: #cbd5e1;       /* slate-300 */
-      --border-default: #e2e8f0;         /* slate-200 */
-      --text-heading: #0f172a;           /* slate-900 */
-      --text-body: #475569;              /* slate-600 */
-      --brand-bg: #1d4ed8;               /* blue-700 */
-      --brand-fg: #1d4ed8;               /* blue-700 */
-      --radius: 0.375rem;
-    }
-
-    /* Automatic variant override when .dark class is added to <html> */
-    .dark {
-      --neutral-primary: #0f172a;        /* slate-900 */
-      --neutral-secondary-soft: #1e293b; /* slate-800 */
-      --neutral-tertiary: #334155;       /* slate-700 */
-      --border-default: #334155;         /* slate-700 */
-      --text-heading: #f8fafc;           /* slate-50 */
-      --text-body: #94a3b8;              /* slate-400 */
-      --brand-bg: #2563eb;               /* blue-600 */
-      --brand-fg: #38bdf8;               /* sky-400 */
-    }
-  </style>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>[BRAND NAME] | Mechanical Precision Template</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .machined-edge {
+            box-shadow: inset 0 1px 0 0 rgba(74, 74, 74, 0.5);
+        }
+        .metallic-gradient {
+            background: linear-gradient(180deg, #242424 0%, #1a1a1a 100%);
+        }
+        .grain-overlay {
+            position: relative;
+        }
+        .grain-overlay::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+        }
+        .led-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.2); }
+        }
+        .recessed-active:active {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+            transform: scale(0.98);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "on-primary": "#561f00",
+                        "tertiary-container": "#9a9898",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#1e2020",
+                        "on-error-container": "#ffdad6",
+                        "on-surface-variant": "#e2bfb0",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "primary-fixed-dim": "#ffb693",
+                        "outline-variant": "#5a4136",
+                        "secondary-fixed": "#e4e2e2",
+                        "primary-container": "#ff6b00",
+                        "inverse-surface": "#e2e2e2",
+                        "outline": "#a98a7d",
+                        "surface-container-highest": "#333535",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "inverse-on-surface": "#2f3131",
+                        "on-secondary": "#303030",
+                        "background": "#121414",
+                        "on-surface": "#e2e2e2",
+                        "primary-fixed": "#ffdbcc",
+                        "inverse-primary": "#a04100",
+                        "on-background": "#e2e2e2",
+                        "on-primary-container": "#572000",
+                        "surface-container-low": "#1a1c1c",
+                        "surface-variant": "#333535",
+                        "surface-bright": "#38393a",
+                        "on-primary-fixed-variant": "#7a3000",
+                        "surface-container-high": "#282a2b",
+                        "on-secondary-container": "#b9b8b8",
+                        "surface-dim": "#121414",
+                        "secondary-container": "#494949",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-tertiary-container": "#313131",
+                        "secondary": "#c8c6c6",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0c0f0f",
+                        "error": "#ffb4ab",
+                        "surface": "#121414",
+                        "tertiary": "#c8c6c5",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "primary": "#ffb693",
+                        "on-tertiary": "#313030",
+                        "on-primary-fixed": "#351000",
+                        "surface-tint": "#ffb693"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "32px",
+                        "unit": "8px",
+                        "stack-md": "16px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1.0", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.0", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
 </head>
-
-<body>
-
-  <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-
-      <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <img src="https://flowbite.com/docs/images/logo.svg" class="h-7" alt="Flowbite Logo" />
-        <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Flowbite</span>
-      </a>
-
-      <button data-collapse-toggle="navbar-default" type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary"
-        aria-controls="navbar-default" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-          viewBox="0 0 24 24">
-          <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
-        </svg>
-      </button>
-      <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-        <ul
-          class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-primary">
-          <li>
-            <a href="#" class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0"
-              aria-current="page">Home</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">About</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Pricing</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
-          </li>
-          <li>
-            <button id="theme-switcher" class="px-3 text-sm font-medium text-heading bg-neutral-secondary-soft rounded-base border border-default cursor-pointer">
-            Toggle Theme
-            </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <main class="bg-neutral-primary pt-20">
-  <div id="container-01" class="mx-auto px-4 py-20 text-center">
-    <h1 class="text-4xl font-extrabold tracking-tight text-heading">
-      Tu presencia digital comienza aquí
-    </h1>
-    <p class="mt-6 text-lg leading-relaxed text-body max-w-2xl mx-auto">
-      Creamos experiencias web atractivas y rápidas con Tailwind CSS. 
-      Dale vida a tus ideas con un diseño moderno y responsivo.
-    </p>
-
-    <div id="container-02" class="mt-8 flex justify-center gap-4">
-      <button id="start" class="inline-block px-6 py-3 text-white bg-brand rounded-base">
-        Comenzar
-      </button>
-      <button id="demo" class="inline-block px-6 py-3 border border-default text-heading rounded-base">
-        Ver demo
-      </button>
-    </div>
-  </div>
-</main>
-
-<section class="bg-neutral-secondary-soft border-t border-default">
-  <div id="container-03" class="px-4 py-8 mx-auto max-w-md md:max-w-xl">
-    <div id="container-04" class="grid grid-cols-2 gap-4 md:grid-cols-4">
-      <img src="https://placehold.co/50" alt="Imagen 1" class="w-full h-auto rounded-base">
-      <img src="https://placehold.co/50" alt="Imagen 2" class="w-full h-auto rounded-base">
-      <img src="https://placehold.co/50" alt="Imagen 3" class="w-full h-auto rounded-base">
-      <img src="https://placehold.co/50" alt="Imagen 4" class="w-full h-auto rounded-base">
-    </div>
-  </div>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md border-b border-outline-variant">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter uppercase">[BRAND NAME]</div>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors duration-200" href="#services">Services</a>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors duration-200" href="#gallery">Gallery</a>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors duration-200" href="#reviews">Reviews</a>
+<a class="font-body-md text-body-md text-on-surface hover:text-primary transition-colors duration-200" href="#hours">Hours</a>
+<button class="bg-primary-container text-on-primary-container font-label-md px-stack-lg py-stack-sm rounded-none font-bold uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all duration-100 shadow-lg">Book Now</button>
+</div>
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Section 1: Hero -->
+<section class="relative min-h-[80vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent z-10"></div>
+<img alt="Professional Mechanical Workshop" class="w-full h-full object-cover grayscale-[20%] brightness-[60%]" src="https://lh3.googleusercontent.com/aida/AP1WRLvk4DMrWVwrE-3yVYixmSOt30YQWnqcjU4PPb6u0tjxaJ48jX856dKIOMAp-WCrhtSftGeWaOyV2iuai-Tkt1gkBKTT93RfrK73nDd_oxKC9nWApEtDc4um6hsjrEVDstB9gM2G6pZL3WfqySnBiQKfy9hji-NnshIhwpjFa7FXLecXaWccLTPyYAS8JHneSUDT4V_kvLBdtEPWUpiMYBM6Wlfq1cDaKMbBoFUjMbshFoUmCvS8fNniScA"/>
+</div>
+<div class="relative z-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+<div class="max-w-2xl space-y-stack-md">
+<div class="flex items-center gap-stack-sm">
+<span class="w-3 h-3 bg-primary-container rounded-full led-pulse"></span>
+<span class="font-label-md text-label-md text-primary tracking-[0.2em] uppercase">[Service Type / Specialization]</span>
+</div>
+<h1 class="font-display-lg text-[40px] md:text-display-lg leading-tight uppercase font-extrabold tracking-tighter">
+                        [HEADLINE GOES <br/> <span class="text-primary-container underline decoration-4 underline-offset-8">RIGHT HERE]</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">
+                        [Describe your professional service here. Highlighting technical expertise and precision standards for demanding clients and machinery.]
+                    </p>
+<div class="pt-stack-lg flex flex-wrap gap-gutter">
+<button class="bg-primary-container text-on-primary-container font-label-md px-stack-lg py-stack-md rounded-none font-bold uppercase tracking-widest hover:brightness-110 transition-all shadow-[8px_8px_0px_0px_rgba(86,31,0,0.3)]">
+                            [Call to Action]
+                        </button>
+<button class="border border-outline-variant font-label-md px-stack-lg py-stack-md rounded-none font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container transition-all">
+                            [Secondary Action]
+                        </button>
+</div>
+</div>
+</div>
 </section>
+<!-- Section 2: Servicios (Bento Grid) -->
+<section class="py-24 bg-surface" id="services">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-stack-md">
+<div class="space-y-stack-sm">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase font-bold tracking-tight">[TECHNICAL PRECISION TITLE]</h2>
+<p class="text-on-surface-variant font-body-md max-w-md">[Brief overview of the professional service range and quality assurance protocols.]</p>
+</div>
+<div class="font-label-sm text-label-sm text-primary uppercase border-b-2 border-primary-container pb-1">[Industry Tagline]</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="md:col-span-2 bg-surface-container-low p-stack-lg border border-outline-variant machined-edge grain-overlay group hover:border-primary-container transition-colors duration-300">
+<div class="flex justify-between items-start mb-12">
+<div class="bg-surface-container-highest p-4 rounded-none border border-outline-variant">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">build</span>
+</div>
+<span class="font-label-sm text-surface-variant font-bold text-2xl">01</span>
+</div>
+<h3 class="font-headline-md text-headline-md uppercase mb-4 group-hover:text-primary-container transition-colors">[Service One]</h3>
+<p class="text-on-surface-variant font-body-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+<!-- Card 2 -->
+<div class="md:col-span-2 bg-surface-container-low p-stack-lg border border-outline-variant machined-edge grain-overlay group hover:border-primary-container transition-colors duration-300">
+<div class="flex justify-between items-start mb-12">
+<div class="bg-surface-container-highest p-4 rounded-none border border-outline-variant">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">tune</span>
+</div>
+<span class="font-label-sm text-surface-variant font-bold text-2xl">02</span>
+</div>
+<h3 class="font-headline-md text-headline-md uppercase mb-4 group-hover:text-primary-container transition-colors">[Service Two]</h3>
+<p class="text-on-surface-variant font-body-md">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<!-- Card 3 -->
+<div class="md:col-span-2 bg-surface-container-low p-stack-lg border border-outline-variant machined-edge grain-overlay group hover:border-primary-container transition-colors duration-300">
+<div class="flex justify-between items-start mb-12">
+<div class="bg-surface-container-highest p-4 rounded-none border border-outline-variant">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<span class="font-label-sm text-surface-variant font-bold text-2xl">03</span>
+</div>
+<h3 class="font-headline-md text-headline-md uppercase mb-4 group-hover:text-primary-container transition-colors">[Service Three]</h3>
+<p class="text-on-surface-variant font-body-md">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+</div>
+<!-- Card 4 -->
+<div class="md:col-span-2 bg-surface-container-low p-stack-lg border border-outline-variant machined-edge grain-overlay group hover:border-primary-container transition-colors duration-300">
+<div class="flex justify-between items-start mb-12">
+<div class="bg-surface-container-highest p-4 rounded-none border border-outline-variant">
+<span class="material-symbols-outlined text-primary-container text-3xl" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-label-sm text-surface-variant font-bold text-2xl">04</span>
+</div>
+<h3 class="font-headline-md text-headline-md uppercase mb-4 group-hover:text-primary-container transition-colors">[Service Four]</h3>
+<p class="text-on-surface-variant font-body-md">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Calidad -->
+<section class="py-24 bg-surface-container-lowest border-y border-outline-variant">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<div class="aspect-square bg-surface-container-high border border-outline-variant flex items-center justify-center p-gutter">
+<img alt="Precision Tools" class="w-full h-full object-cover grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAym-ZfYgZbjv7WJ4RvRUiUdCoIs2QPQiehGmRLh7UhSgpvPV6IyJ5mWNbjd1m3hSLBpzNhEv8K35d4NKJ5-xRGdLJe7NeCYaHn8K6hZlPBXSamd2DkAmgog7md_L_l8Y6VmTSzlyem2mAR1aL3kNlvyYRjzHhNOrh4860oTmmoS_CBw3KcTWnpNQ4IRrGHr2rm1B6PuwaoevUkQIB7ZrWhY10jy-Y7qvGqdSGaq4w8z4Kab4-4GAGkdmnj1reXL6fP69F-pDWp_ys"/>
+</div>
+<!-- Stats badge -->
+<div class="absolute -bottom-8 -right-8 bg-primary-container p-stack-lg text-on-primary-container">
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-extrabold">[Value]</div>
+<div class="font-label-sm uppercase tracking-tighter">[Metric Title]</div>
+</div>
+</div>
+<div class="space-y-stack-lg">
+<h2 class="font-display-lg text-[32px] md:text-headline-lg uppercase font-extrabold leading-tight">[QUALITY STANDARDS <br/> TITLE]</h2>
+<p class="text-on-surface-variant font-body-lg">
+                        [Explain your commitment to quality. Detail the use of premium components and industrial-grade equipment to ensure maximum precision and reliability.]
+                    </p>
+<ul class="space-y-stack-md">
+<li class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md text-on-surface">[Quality Certification A]</span>
+</li>
+<li class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md text-on-surface">[Quality Certification B]</span>
+</li>
+<li class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary-container">check_circle</span>
+<span class="font-body-md text-on-surface">[Traceability Standards]</span>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- Section 4: Testimonios -->
+<section class="py-24 bg-surface grain-overlay" id="reviews">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase font-bold tracking-tight mb-4">[VOICE OF THE EXPERTS]</h2>
+<div class="h-1 w-24 bg-primary-container mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Testimonial 1 -->
+<div class="bg-surface-container p-stack-lg border border-outline-variant flex flex-col justify-between">
+<p class="font-body-md text-on-surface italic mb-8">"[Placeholder testimonial quote. Replace with actual client feedback regarding your professional services and attention to detail.]"</p>
+<div class="flex items-center gap-stack-md">
+<img alt="Customer" class="w-12 h-12 rounded-full grayscale border border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJxHuL-nNkrD2mur8LasN4gHHajYnhCXsBjPaaQM86FRRIYmCytcN46YmAJvD3RJz49DNa1Zkk8DfEkS891fW60LuovjJ4zdmzCuvW8MKv3MEmhBcNPr5TQVuQSza6IkXGD2jILq2JFIQLsE_kQWb2PzWNKYxnT0bApPbry5BeaRzp1EvBTANQmCUGMfUtnb30av-TqYDNLfnb8nwsDhmlxzGLkN74x9SYJ8MwpW-wyBNAJQXq4LJU-QGAJkuKr2AE61b0mas80u4"/>
+<div>
+<div class="font-label-md text-primary">[Client Name]</div>
+<div class="font-label-sm text-on-surface-variant uppercase">[Job Title]</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="bg-surface-container p-stack-lg border border-outline-variant flex flex-col justify-between">
+<p class="font-body-md text-on-surface italic mb-8">"[Placeholder testimonial quote. Replace with actual client feedback regarding your professional services and attention to detail.]"</p>
+<div class="flex items-center gap-stack-md">
+<img alt="Customer" class="w-12 h-12 rounded-full grayscale border border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8rpWNqO7bQmaPfQ3rsnZnA0cfUVfDt2as3cTfFjyJkOhECO0eYiQuJvy1JYlVecJY-_TZQZGno_HGbN6ABY7vf2zfyajD766XwQ7QWVFHh4Dwq1stYK3OOQjdupkLMZod1H1dnjfwNXJbpMmtyk39RZkSXEpBIqSpQhhwaS40PmH0Zlv8NcdOC2ncQ3sxRV3BCS3UYxElW56AKZEUd8elIIbfo_9CAg1Fc8vAXmEeolTZePGxzCzFo4pyMdV39xpfmOn7KDrCToM"/>
+<div>
+<div class="font-label-md text-primary">[Client Name]</div>
+<div class="font-label-sm text-on-surface-variant uppercase">[Job Title]</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="bg-surface-container p-stack-lg border border-outline-variant flex flex-col justify-between">
+<p class="font-body-md text-on-surface italic mb-8">"[Placeholder testimonial quote. Replace with actual client feedback regarding your professional services and attention to detail.]"</p>
+<div class="flex items-center gap-stack-md">
+<img alt="Customer" class="w-12 h-12 rounded-full grayscale border border-primary-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXBWh7KozsTXjgv15ao6afyJfMWg1Bg_3BeXAQTie9yAIR4JHjZ9LN1OpByYe5MVVmO5V9Tj79ttM7GoD81fY4ULxTh7IyeFUXjzZUZs56zCzvqHIB6BRTHazEIxVoZj9iDVelLfMh8MJ5L8KpCwsj4iBdmxQAZIrNE0DMRUzFe_4wLENQ0u6RC_TlTSvCTRO19o4Y9_zoXeEmvLH8T3EZUh23yngRO-a80-14d4IzNXEp6RbE_8ZqCBkSmEPCrqv06zSXQauwjDw"/>
+<div>
+<div class="font-label-md text-primary">[Client Name]</div>
+<div class="font-label-sm text-on-surface-variant uppercase">[Job Title]</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Contacto -->
+<section class="py-24 bg-surface-container-low" id="contact">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 lg:grid-cols-2 gap-20">
+<div class="space-y-stack-lg">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase font-bold tracking-tight">[BOOK AN APPOINTMENT]</h2>
+<form class="space-y-stack-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<input class="w-full bg-surface-container-highest border border-outline-variant p-4 font-label-sm text-on-surface focus:border-primary-container focus:ring-0 rounded-none uppercase" placeholder="[FULL NAME]" type="text"/>
+<input class="w-full bg-surface-container-highest border border-outline-variant p-4 font-label-sm text-on-surface focus:border-primary-container focus:ring-0 rounded-none uppercase" placeholder="[EMAIL ADDRESS]" type="email"/>
+</div>
+<select class="w-full bg-surface-container-highest border border-outline-variant p-4 font-label-sm text-on-surface focus:border-primary-container focus:ring-0 rounded-none uppercase">
+<option>[SELECT SERVICE TYPE]</option>
+<option>[OPTION A]</option>
+<option>[OPTION B]</option>
+<option>[OPTION C]</option>
+</select>
+<textarea class="w-full bg-surface-container-highest border border-outline-variant p-4 font-label-sm text-on-surface focus:border-primary-container focus:ring-0 rounded-none uppercase" placeholder="[DESCRIPTION OF TECHNICAL REQUIREMENTS]" rows="4"></textarea>
+<button class="w-full bg-primary-container text-on-primary-container font-label-md px-stack-lg py-4 rounded-none font-bold uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all" type="submit">
+                            [SEND REQUEST]
+                        </button>
+</form>
+</div>
+<div class="space-y-stack-lg">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg uppercase font-bold tracking-tight">[WORKSHOP LOCATION]</h2>
+<div class="aspect-video bg-surface-container-high border border-outline-variant grayscale brightness-[0.7] contrast-[1.2] relative">
+<img alt="Workshop Location Map" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoOw7E1VDkqGP-wxxpNIGVABuAK-1DHgUfLcePeMPBxDomCFe83MEg5aeABH_WB2tJRrTXy2fOmEE6QEn3w5izCIlhfP4DGkrgQ442sxkD22_Bb6ttb_RXoRhIUwkGghksVUuVUHDwr2qw4FvuBIONGXOQcd3MszeKZ2SxhDrHVIQ8wWFRwTpATHdn9M5DzpEmdzPQlweE5NsKvTVtfYohkzxuDjPDoTS_XAtQoop61uthzyxDcHdYRWVHTCXlo4JgnX--gcofdUE"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-8 h-8 bg-primary-container rounded-full led-pulse shadow-[0_0_20px_rgba(255,107,0,0.8)]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-gutter text-on-surface-variant font-label-sm uppercase">
+<div>
+<div class="text-primary mb-2">Address</div>
+<div>[Address Line 1]<br/>[City], [Zip Code]</div>
+</div>
+<div>
+<div class="text-primary mb-2">Business Hours</div>
+<div>[Days]: [Open] - [Close]<br/>[Days]: [Open] - [Close]</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2 space-y-stack-md">
+<div class="font-headline-sm text-headline-sm font-bold text-primary uppercase">[BRAND NAME]</div>
+<p class="font-body-md text-on-surface-variant max-w-sm">[General description of the brand's dedication to mechanical excellence and precision.]</p>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-stack-lg uppercase tracking-tighter">
+                    © 2024 [BRAND NAME] MECHANICAL PRECISION. ALL RIGHTS RESERVED.
+                </div>
+</div>
+<div class="space-y-stack-md">
+<div class="font-label-md text-primary uppercase font-bold">Links</div>
+<ul class="space-y-2">
+<li><a class="font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Terms of Service</a></li>
+<li><a class="font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Safety Protocols</a></li>
+</ul>
+</div>
+<div class="space-y-stack-md">
+<div class="font-label-md text-primary uppercase font-bold">Social</div>
+<div class="flex gap-stack-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">share_reviews</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">camera_alt</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">mail</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-  
-</body>
+        // Simple intersection observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1
+        };
 
-</html>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'ease-out');
+        });
+    </script>
+</body></html>
