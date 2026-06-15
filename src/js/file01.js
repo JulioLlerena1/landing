@@ -1,7 +1,25 @@
 "use strict";
 
+/**
+ * @fileoverview Renderiza productos, categorías y controla comportamientos UI.
+ * @module src/js/file01
+ */
+
 import { fetchProducts, fetchCategories } from "./functions";
 
+/**
+ * @typedef {Object} Product
+ * @property {string} title - Título del producto.
+ * @property {string} imgUrl - URL de la imagen del producto.
+ * @property {string|number} price - Precio del producto.
+ * @property {string} productURL - Enlace al producto.
+ * @property {string|number} category_id - Identificador de la categoría.
+ */
+
+/**
+ * Carga y renderiza los primeros nueve productos en el contenedor de la página.
+ * @returns {void}
+ */
 const renderProducts = () => {
 
     fetchProducts("https://data-dawm.github.io/datum/reseller/products.json")
@@ -48,6 +66,10 @@ const renderProducts = () => {
         });
 };
 
+/**
+ * Carga y renderiza las categorías dentro del elemento select de la página.
+ * @returns {Promise<void>} Promise que se resuelve cuando finaliza el renderizado de las categorías.
+ */
 const renderCategories = async () => {
 
     try {
@@ -76,6 +98,10 @@ const renderCategories = async () => {
     }
 };
 
+/**
+ * Muestra el toast interactivo si el elemento existe en el DOM.
+ * @returns {void}
+ */
 const showToast = () => {
     const toast = document.getElementById("toast-interactive");
     if (toast) {
@@ -83,6 +109,10 @@ const showToast = () => {
     }
 };
 
+/**
+ * Añade el evento para abrir el video de demostración en una nueva pestaña.
+ * @returns {void}
+ */
 const showVideo = () => {
     const demo = document.getElementById("demo");
     if (demo) {
