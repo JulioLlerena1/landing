@@ -54,7 +54,7 @@ let fetchCategories = async (url) => {
             throw new Error(`Error HTTP: ${response.status}`);
         }
 
-        let text = await response.text()
+        const text = await response.text()
 
         const parser = new DOMParser();
         const data = parser.parseFromString(text, "application/xml");

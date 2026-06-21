@@ -6,6 +6,7 @@
  */
 
 import { fetchProducts, fetchCategories } from "./functions";
+import { saveVote } from "./firebase";
 
 /**
  * @typedef {Object} Product
@@ -122,10 +123,30 @@ const showVideo = () => {
     }
 };
 
+const enableForm = () => {
+    
+    const form = document.getElementById("form_voting");
+    form.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const selectedProduct = document.getElementById("select_product").value;
+
+        try {
+            const response = await saveVote(selectedProduct);
+            if (response.status) {
+                alert(response.message);
+            }
+        } catch (error) {
+                alert("Error al guardar el voto: " + error.message);
+            };
+    });
+};
 
 (() => {
     showVideo();
     showToast();
     renderProducts();
     renderCategories();
+    enableForm();
 })();
