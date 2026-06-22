@@ -45,7 +45,7 @@ let fetchProducts = (url) => {
  * @param {string} url - URL del recurso XML.
  * @returns {Promise<FetchResult>} Resultado con un Document XML en caso exitoso o el error.
  */
-let fetchCategories = async (url) => {
+let fetchCategories = async (url) => {  
 
     try {
         const response = await fetch(url);
