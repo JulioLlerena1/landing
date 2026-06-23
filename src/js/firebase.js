@@ -13,7 +13,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const database = getDatabase(app);
+// Asegura que exista una URL de Realtime Database. Si no está presente
+// en las variables de entorno, construimos un fallback usando el projectId.
+const dbURL = firebaseConfig.databaseURL || (firebaseConfig.projectId ? `https://${firebaseConfig.projectId}.firebaseio.com` : undefined);
+
+// Pasa la URL explícita a getDatabase(app, url) para evitar el error
+// "Can't determine Firebase Database URL" cuando falta la configuración.
+const database = dbURL ? getDatabase(app, dbURL) : getDatabase(app);
 
 const saveVote = async (productID) => {
 
