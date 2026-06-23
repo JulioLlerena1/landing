@@ -35,4 +35,4 @@ const saveVote = async (productID) => {
 
 };
 
-export {getDatabase, ref, set, push, get, child};
+export {getDatabase, ref, set, push, get, child, saveVote};
